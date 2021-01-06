@@ -1,2 +1,8 @@
 
-module.exports = {};
+module.exports = {
+    "/blogs/vuepress/": [
+        "",
+        "theme"
+    ]
+
+};

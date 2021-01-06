@@ -2,9 +2,29 @@
 module.exports = [
     { text: "Home", link: "/" },
     {
-        text: "Contact",
+        text: "Category",
         items: [
-            { text: "github", link: "https://github.com/github-yeah/blog.leaf" }
+            {
+                text: "Archives",
+                items: [
+                    { text: "vue", link: "/blogs/vue/" },
+                    { text: "vuepress", link: "/blogs/vuepress/" }
+                ]
+            },
+            {
+                text: "Guide",
+                items: [
+                    { text: "introduce", link: "/guide/" }
+                ]
+            }
+        ]
+    },
+    {
+        text: "Contact",
+        ariaLabel: "Contact Menu",
+        items: [
+            { text: "Vue", link: "https://cn.vuejs.org/v2/guide/" },
+            { text: "VuePress", link: "https://www.vuepress.cn/" }
         ]
     },
 ];
