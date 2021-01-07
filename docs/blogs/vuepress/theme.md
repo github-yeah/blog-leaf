@@ -174,40 +174,8 @@ navbar: false
     ];
     ```
 
-3. 不同页面显示不同的侧边栏
+3. 不同页面显示不同的侧边栏 <Badge text="以页面路由为key"/>
 
-```js{3}
-// .vuepress/config.js
-module.exports = {
-    "/blogs/vuepress/": [
-        {
-            title: "Guide",
-            collapsable: false,
-            children: [
-                "",
-                "theme",
-                "markdown"
-            ]
-        },
-        {
-            title: "Advanced",
-            collapsable: false,
-            children: [
-                "advanced"
-            ]
-        }
-    ],
-    "/blogs/vue/": [
-        {
-            title: "Vue Guide",
-            collapsable: false,
-            children: [
-                "",
-                "introduce",
-            ]
-        }
-    ]
-};
-```
+<<< @/docs/.vuepress/config-sidebar.js#pageMatch{3-4}
 
 :::

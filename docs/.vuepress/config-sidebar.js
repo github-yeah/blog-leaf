@@ -1,5 +1,7 @@
+//#region pageMatch
 // 不同页面显示不同的侧边栏=========
 module.exports = {
+    // 页面路由地址为key，当打开这个路由对应的页面时，侧边栏将按照以下展示
     "/blogs/vuepress/": [
         {
             title: "Guide",
@@ -7,14 +9,18 @@ module.exports = {
             children: [
                 "",
                 "theme",
-                "markdown"
+                "markdown",
+                "use-vue",
+                "deploy"
             ]
         },
         {
             title: "Advanced",
             collapsable: false,
             children: [
-                "advanced"
+                "advanced",
+                "Front-Matter",
+                "slot"
             ]
         }
     ],
@@ -24,11 +30,12 @@ module.exports = {
             collapsable: false,
             children: [
                 "",
-                "introduce",
+                "introduce"
             ]
         }
     ]
 };
+//#endregion pageMatch
 
 
 
