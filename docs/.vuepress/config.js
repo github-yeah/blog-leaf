@@ -23,7 +23,7 @@ module.exports = {
         // 导航栏logo
         logo: 'assets/hero.jpg',
         // 获取最后一次 git 提交的时间并以日期格式显示在页面的底部
-        lastUpdated: 'Last Updated',
+        lastUpdated: '最后更新',
         // 仓库连接地址
         repo: "https://github.com/github-yeah/blog.leaf",
         // 仓库连接在导航栏最后一个位置所展示的文本内容
