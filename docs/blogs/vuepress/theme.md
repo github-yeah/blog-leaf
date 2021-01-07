@@ -181,12 +181,19 @@ navbar: false
 module.exports = {
     "/blogs/vuepress/": [
         {
-            title: "VuePress Guide",
+            title: "Guide",
             collapsable: false,
             children: [
                 "",
                 "theme",
                 "markdown"
+            ]
+        },
+        {
+            title: "Advanced",
+            collapsable: false,
+            children: [
+                "advanced"
             ]
         }
     ],
