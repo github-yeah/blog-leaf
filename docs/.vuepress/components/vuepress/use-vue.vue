@@ -10,7 +10,7 @@ export default Vue.extend({
 </script>
 <style scoped>
 .box {
-    background: red;
+    background: green;
     text-align: center;
 }
 </style>

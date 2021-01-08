@@ -11,6 +11,7 @@ const sidebar = require("./config-sidebar.js");
 module.exports = {
     title: package.name,
     description: package.description,
+    base: "/blog.leaf/",
     head: [
         ["link", { rel: "icon", href: "/favicon.ico" }],
         ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no" }]
