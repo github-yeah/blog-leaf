@@ -1,0 +1,26 @@
+<!-- 在md文件中输入以下内容 -->
+
+<!-- 样式 -->
+<style>
+    .box {
+        background: yellow;
+        text-align: center;
+    }
+</style>
+
+<!-- html -->
+<div id="mydiv">
+    我是一个div, id="mydiv", 通过js设置样式
+</div>
+
+<div class="box">
+    我是一个div, class="box"
+</div>
+
+<!-- js -->
+<script>
+    window.onload = function () {
+        var mydiv = document.getElementById("mydiv");
+        mydiv.className = "box";
+    }
+</script>

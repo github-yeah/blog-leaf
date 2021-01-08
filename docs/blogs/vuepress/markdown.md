@@ -5,6 +5,25 @@ tags:
     - markdown
 ---
 
+## 连接
+
+格式：```[连接文本](路径#锚点)```
+
+**输入**：
+
+```md
+[点我跳转到本页自定义容器](#自定义容器-badge-text默认主题)
+```
+
+**结果**：
+[点我跳转到本页`自定义容器`](#自定义容器)
+
+::: tip
+
+- 页面内跳转可以忽略路径，直接设置锚点即可
+  
+:::
+
 ## 表格
 
 **输入**：
@@ -117,8 +136,9 @@ function snippet() {
 }
 ```
 
-**代码高亮行数区间规则** <Badge text="逗号之间不要有空格"/>
+**代码高亮行数区间规则** <Badge text="逗号之间不要有空格" type="warning"/>
 
+- 行数是从1开始（不是从0开始）
 - 单行: `{n}`
 - 跳行: `{n1,n3,n5}`
 - 连续多行: `{n1-n3,n5-n9}`
@@ -182,3 +202,7 @@ module.exports = {
 <<< @/src/vuepress/vuepress-code-snippet.js{2,6}
 
 :::
+
+## 直接使用原生JS和CSS
+
+<<< @/src/vuepress/vuepress-use-html-js-css.html

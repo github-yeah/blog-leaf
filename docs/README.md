@@ -1,17 +1,18 @@
 ﻿---
 home: true
 heroImage: /assets/hero.jpg
-heroText: A Leaf
-tagline: A simple and beautiful blog
+lang: zh-CN
+heroText: 一叶知秋
+tagline: 又菜又爱玩
 isShowTitleInHome: false
 actionText: "开始->"
 actionLink: /guide/
 features:
-- title: Yesterday
-  details: 开发一款看着开心、写着顺手的 vuepress 博客主题
-- title: Today
-  details: 希望帮助更多的人花更多的时间在内容创作上，而不是博客搭建上
-- title: Tomorrow
-  details: 希望更多的爱好者能够参与进来，帮助这个主题更好的成长
+- title: Blog
+  details: 基于VuePress搭建的日常记录
+- title: Web
+  details: Vue在路上
+- title: Game
+  details:  游戏开发者 | 王者荣耀玩家 | PS游戏玩家
 footer: MIT Licensed | Copyright © 2021-present github-yeah
 ---

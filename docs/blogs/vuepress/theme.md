@@ -174,7 +174,7 @@ navbar: false
     ];
     ```
 
-3. 不同页面显示不同的侧边栏 <Badge text="以页面路由为key"/>
+3. 不同页面显示不同的侧边栏 <Badge text="以页面路由为key" type="tip"/>
 
 <<< @/docs/.vuepress/config-sidebar.js#pageMatch{3-4}
 
