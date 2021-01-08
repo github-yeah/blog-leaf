@@ -13,7 +13,7 @@ module.exports = {
     description: package.description,
     base: "/blog-leaf/",
     head: [
-        ["link", { rel: "icon", href: "assets/hero.jpg" }],
+        ["link", { rel: "icon", href: "assets/favicon2.png" }],
         ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no" }]
     ],
     themeConfig: {
