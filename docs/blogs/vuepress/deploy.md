@@ -16,4 +16,4 @@ tags:
 
 ## Push代码时触发自动部署
 
-**To be continue...**:
+To be continue
