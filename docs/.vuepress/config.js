@@ -11,7 +11,7 @@ const sidebar = require("./config-sidebar.js");
 module.exports = {
     title: package.name,
     description: package.description,
-    base: "/blog.leaf/",
+    base: "/blog-leaf/",
     head: [
         ["link", { rel: "icon", href: "/favicon.ico" }],
         ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no" }]
@@ -26,7 +26,7 @@ module.exports = {
         // 获取最后一次 git 提交的时间并以日期格式显示在页面的底部
         lastUpdated: '最后更新',
         // 仓库连接地址
-        repo: "https://github.com/github-yeah/blog.leaf",
+        repo: "https://github.com/github-yeah/blog-leaf",
         // 仓库连接在导航栏最后一个位置所展示的文本内容
         repoLabel: "Github",
         // 页面滚动

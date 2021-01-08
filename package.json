@@ -1,5 +1,5 @@
 {
-  "name": "blog.leaf",
+  "name": "blog-leaf",
   "version": "1.0.0",
   "description": "Vue + VuePress + TypeScript + JavaScript",
   "main": "index.js",

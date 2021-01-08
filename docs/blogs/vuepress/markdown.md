@@ -177,7 +177,7 @@ module.exports = {
 
 **通过`#region`导入文件的部分代码块**
 
-文件路径：`blog.leaf/src/vuepress/vuepress-code-snippet.js`
+文件路径：`blog-leaf/src/vuepress/vuepress-code-snippet.js`
 
 **输入**：
 

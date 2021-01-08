@@ -1,5 +1,5 @@
 ---
-title: blog.leaf Guide
+title: blog-leaf Guide
 sidebarDepth: 2
 tags: 
     - VuePress
