@@ -1,7 +1,7 @@
 {
   "name": "blog-leaf",
   "version": "1.0.0",
-  "description": "Vue + VuePress + TypeScript + JavaScript",
+  "description": "Vue + VuePress + TypeScript + JavaScript + HTML + CSS",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev docs . --open --host \"localhost\"",
