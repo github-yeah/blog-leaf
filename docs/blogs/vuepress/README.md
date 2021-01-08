@@ -1,5 +1,5 @@
 ---
-title: 快速开始
+title: ":fallen_leaf: 快速开始"
 sidebarDepth: 2
 tags: 
     - VuePress

@@ -2,7 +2,7 @@
 home: true
 heroImage: /assets/hero.png
 lang: zh-CN
-heroText: 一叶知秋
+heroText: "一叶知秋"
 tagline: 又菜又爱玩
 isShowTitleInHome: false
 actionText: "开始->"

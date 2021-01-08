@@ -49,12 +49,12 @@ tags:
 **输入**：
 
 ```js
-:tada: :100:
+:tada: :100: :fallen_leaf:
 ```
 
 **结果**：
 
-:tada: :100:
+:tada: :100: :fallen_leaf:
 
 [更多可用表情](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json)
 
