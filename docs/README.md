@@ -1,6 +1,6 @@
 ﻿---
 home: true
-heroImage: /assets/favicon2.png
+heroImage: /assets/hero.png
 lang: zh-CN
 heroText: 一叶知秋
 tagline: 又菜又爱玩

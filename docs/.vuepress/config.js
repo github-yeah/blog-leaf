@@ -13,7 +13,7 @@ module.exports = {
     description: package.description,
     base: "/blog-leaf/",
     head: [
-        ["link", { rel: "icon", href: "assets/favicon2.png" }],
+        ["link", { rel: "icon", href: "assets/favicon.png" }],
         ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no" }]
     ],
     themeConfig: {
@@ -22,7 +22,7 @@ module.exports = {
         // 侧边栏。可以设置为boolean类型， 表示所有界面都开启自动生成侧边栏
         sidebar: sidebar,
         // 导航栏logo
-        logo: 'assets/hero.jpg',
+        logo: 'assets/favicon.png',
         // 获取最后一次 git 提交的时间并以日期格式显示在页面的底部
         lastUpdated: '最后更新',
         // 仓库连接地址
