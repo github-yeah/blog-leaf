@@ -6,3 +6,5 @@ tags:
 ---
 
 ## 安装
+
+<vue-TreeView />

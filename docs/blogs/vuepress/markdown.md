@@ -98,6 +98,28 @@ This is a details block, which does not work in IE / Edge
 这是一个详情块，在 IE / Edge 中不生效
 :::
 
+## 代码Diff
+
+**输入**：
+
+```` diff
+```diff
+const unique = <T>(arr: T[]) => {
+-       return Array.from(new Set<arr>);
++    return [...new Set(arr)];
+}
+```
+````
+
+**输出**：
+
+```diff
+const unique = <T>(arr: T[]) => {
+-       return Array.from(new Set<arr>);
++    return [...new Set(arr)];
+}
+```
+
 ## 代码块以及语法高亮
 
 **输入**：
