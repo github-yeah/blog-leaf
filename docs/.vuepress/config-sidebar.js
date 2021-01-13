@@ -30,7 +30,7 @@ module.exports = {
             collapsable: false,
             children: [
                 "",
-                "introduce"
+                "templete-syntax"
             ]
         }
     ]

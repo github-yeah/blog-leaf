@@ -1,5 +1,5 @@
 ---
-title: "Vue简介"
+title: "模版语法"
 sidebarDepth: 1
 tags: 
     - vue
