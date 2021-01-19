@@ -21,6 +21,9 @@ tags:
     ```
 
 3. 发布运行项目根目录的`deploy.sh`进行部署
+    - 1. 在项目terminal中执行`./deploy.sh`
+    - 2. 或找到`deploy.sh`双击运行
+  
    ::: tip
     - 自动构建
     - 自动提交到`gh-pages`分支
