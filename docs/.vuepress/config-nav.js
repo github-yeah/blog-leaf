@@ -8,7 +8,8 @@ module.exports = [
                 text: "Archives",
                 items: [
                     { text: "vue", link: "/blogs/vue/" },
-                    { text: "vuepress", link: "/blogs/vuepress/" }
+                    { text: "vuepress", link: "/blogs/vuepress/" },
+                    { text: "others", link: "/blogs/others/" }
                 ]
             },
             {

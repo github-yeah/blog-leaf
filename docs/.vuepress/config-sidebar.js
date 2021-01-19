@@ -33,6 +33,17 @@ module.exports = {
                 "templete-syntax"
             ]
         }
+    ],
+    "/blogs/others/": [
+        {
+            title: "Others",
+            collapsable: false,
+            children: [
+                "",
+                "vscode",
+                "CLI"
+            ]
+        }
     ]
 };
 //#endregion pageMatch
