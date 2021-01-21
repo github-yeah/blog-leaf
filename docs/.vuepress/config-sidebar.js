@@ -36,15 +36,25 @@ module.exports = {
     ],
     "/blogs/others/": [
         {
-            title: "Others",
+            title: "TypeScript",
+            // collapsable: false,
+            children: [
+                "ts-project-config",
+                "tsconfig/package-json",
+                "tsconfig/tsconfig-json"
+            ]
+        },
+        {
+            title: "Advanced",
             collapsable: false,
             children: [
                 "",
                 "vscode",
-                "CLI"
+                "ts-project-config",
+                "CLI",
             ]
-        }
-    ]
+        },
+    ],
 };
 //#endregion pageMatch
 
