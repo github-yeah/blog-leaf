@@ -39,9 +39,10 @@ module.exports = {
             title: "TypeScript",
             // collapsable: false,
             children: [
-                "ts-project-config",
-                "tsconfig/package-json",
-                "tsconfig/tsconfig-json"
+                "ts/",
+                "ts/package-json",
+                "ts/tsconfig-json",
+                "ts/gulp"
             ]
         },
         {

@@ -1,12 +1,10 @@
 ---
-title: "package.json 和 tsconfig.json"
+title: "package.json"
 sidebarDepth: 2
 tags: 
     - pakage
-    - tsconfig
 ---
 
-## pakage.json
 
 ### 初始化`package.json`
 
@@ -36,20 +34,12 @@ npm init
         "scripts": {
             // build之前先执行此命令, 如果使用`rimraf`需提前安装`rimraf`依赖
             "prebuild": "rimraf dist",
-            // 编译ts
-            "build": "tsc",
-            // 编译并持续监听ts文件变化，ts文件变化后自动编译
-            "build:dev": "tsc -w",
+            // 编译ts，可以简写 `tsc -b`
+            "build": "tsc --build",
+            // 编译并持续监听ts文件变化，ts文件变化后自动编译，可以简写 `tsc -w`
+            "build:dev": "tsc -watch",
             // 执行 *.ts文件
             "start": "ts-node xxxxxx.ts",
         }
     }
     ```
-
-## tsconfig.json
-
-### 初始化`tsconfig.json`
-
-```bash
-tsc --init
-```
