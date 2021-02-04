@@ -37,7 +37,7 @@ module.exports = {
     "/blogs/others/": [
         {
             title: "TypeScript",
-            // collapsable: false,
+            collapsable: false,
             children: [
                 "ts/",
                 "ts/package-json",
@@ -51,8 +51,7 @@ module.exports = {
             children: [
                 "",
                 "vscode",
-                "ts-project-config",
-                "CLI",
+                "CLI"
             ]
         },
     ],

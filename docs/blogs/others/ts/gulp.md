@@ -1,5 +1,5 @@
 ---
-title: "gulp 配置"
+title: "TypeScript集成Gulp"
 sidebarDepth: 1
 tags: 
     - gulp
@@ -28,29 +28,45 @@ npm install gulp-cli -g
 - 安装开发依赖
 
 ```bash
-npm install typescript gulp gulp-typescript -D
+npm install  gulp -D
 ```
 
-- 如果使用 TypeScript 实现任务，即：`gulpfile.ts`代替`gulpfile.js`
+- 我们使用 `gulpfile.ts` 代替 `gulpfile.js` 实现任务脚本，需安装：
 
 ```bash
-npm install ts-node @types/gulp -D
+npm install ts-node typescript @types/gulp -D
 ```
 
-## 创建`gulpfile.js`
+- 安装 `gulp-typescript`插件，用于编译`.ts`文件，
 
-在项目的根目录创建`gulpfile.js`
+```bash
+npm install gulp-typescript -D
+```
 
-:::tip 写入任务后进行测试
+- 安装 `del`本地依赖，用于清理`dist`目录，
+
+```bash
+npm install del -D
+```
+
+## 创建`gulpfile.ts`
+
+在项目的根目录创建`gulpfile.ts`
+
+`gulpfile.ts`内容：
+
+<<< @/docs/blogs/others/ts/gulpfile.js#ts
+
+## 使用gulp
 
 在控制台输入：
 
 ```bash
-gulp    // 执行`gulpfile.js`， 不加参数则等价于：gulp default
-node folder/file.js     // 运行编译完的具体js文件
+gulp    // 执行`gulpfile.ts`， 不加参数则等价于执行`default`任务：gulp default
+node folder/file.js     // 测试运行编译完的具体js文件
 ```
 
-:::
+## 使用控制台参数
 
 ## 常用API
 
@@ -85,3 +101,10 @@ node folder/file.js     // 运行编译完的具体js文件
 ## 常用插件
 
 ### gulp-typescript
+
+### 使用gulp进行文件复制等操作
+
+```ts
+gulp.src(["a.png", "b.js"]).pipe(dest("b/c"))
+
+```

@@ -1,3 +1,6 @@
 node_modules
 package-lock.json
 docs/.vuepress/dist
+gulp-practies/node_modules
+gulp-practies/package-lock.json
+gulp-practies/dist
