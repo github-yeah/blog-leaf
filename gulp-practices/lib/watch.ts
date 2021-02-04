@@ -12,22 +12,23 @@ export namespace tsWatch {
         callback => gulp.watch(input_globs)
             .on("add", filePath => {
                 console.log(`新增文件:\n${filePath}`);
-                tsCompiler.compile(filePath)(callback);
+                // 编译文件
             })
             .on("addDir", filePath => {
                 console.log(`新增文件夹:\n${filePath}`);
+                // do nothing
             })
             .on("unlink", filePath => {
                 console.log(`移除文件:\n${filePath}`);
                 const dtsPath = filePath.replace(input_dir, out_dir_dts).replace(".ts", ".d.ts");
                 const jsPath = filePath.replace(input_dir, out_dir).replace(".ts", ".js");
-
-                clean([dtsPath, jsPath])(arg => {
-                    console.log(arg);
-                })
+                clean([dtsPath, jsPath])(callback)
             })
             .on("unlinkDir", filePath => {
                 console.log(`移除文件夹:\n${filePath}`);
+                const dtsPath = filePath.replace(input_dir, out_dir_dts);
+                const jsPath = filePath.replace(input_dir, out_dir);
+                clean([dtsPath, jsPath])(callback)
             })
             .on("change", filePath => {
                 console.log(`文件内容改变:\n${filePath}`);
