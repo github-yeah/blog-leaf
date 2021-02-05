@@ -1,17 +1,18 @@
 {
-  "name": "gulp-practices",
-  "version": "1.0.0",
-  "description": "gulp practices",
-  "main": "index.js",
+  "name": "leaf-cli",
+  "version": "0.0.1",
+  "description": "cli 0-1",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "cli",
+    "command-line"
+  ],
   "author": "github-yeah",
   "license": "ISC",
   "devDependencies": {
-    "@types/gulp": "^4.0.8",
-    "gulp": "^4.0.2",
-    "gulp-typescript": "^6.0.0-alpha.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   }

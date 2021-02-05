@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
 docs/.vuepress/dist
-gulp-practies/node_modules
-gulp-practies/package-lock.json
-gulp-practies/dist
+leaf-cli/node_modules
+leaf-cli/package-lock.json
+leaf-cli/dist

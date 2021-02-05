@@ -34,6 +34,17 @@ module.exports = {
             ]
         }
     ],
+    "/blogs/cli/": [
+        {
+            title: "Command-Line Interface",
+            collapsable: false,
+            children: [
+                "",
+                "gulp",
+                "child_process"
+            ]
+        }
+    ],
     "/blogs/others/": [
         {
             title: "TypeScript",
