@@ -11,6 +11,7 @@ tags:
 
 - 单纯调用`tsc`命令，编译器会从当前目录逐级向上搜索`tsconfig.json`文件
 - 调用`tsc --project projectName`或`tsc -p projectName`可以指定一个包含`tsconfig.json`的目录
+- `tsc --watch`，监听文件变化后编译
 
 ## 初始化`tsconfig.json`
 

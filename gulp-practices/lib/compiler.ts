@@ -1,5 +1,5 @@
 import { define } from './utils';
-import { tsconfig, out_dir } from './constants';
+import { tsconfig, out_dir, out_dir_dts } from './constants';
 import * as ts from "gulp-typescript";
 import { src, dest } from 'gulp';
 

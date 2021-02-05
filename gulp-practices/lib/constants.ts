@@ -11,8 +11,7 @@ export const input_globs = `${input_dir}/**/*`;
 // 输出目录
 export const out_dir = "dist";
 // dts 输出目录
-export const out_dir_dts = "dist";
-// export const out_dir_dts = "dist/@types";
+export const out_dir_dts = "dist/@types";
 
 
 // ======================================

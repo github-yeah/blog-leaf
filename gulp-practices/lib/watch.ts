@@ -33,7 +33,8 @@ export namespace tsWatch {
             .on("change", filePath => {
                 console.log(`文件内容改变:\n${filePath}`);
             })
-        , "启动项目监听..."
+            .on("error", err => callback(err))
+        , "项目监听..."
         , "监听文件变动，自动编译"
     );
 
