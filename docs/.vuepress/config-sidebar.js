@@ -41,7 +41,7 @@ module.exports = {
             children: [
                 "",
                 "gulp",
-                "child_process"
+                "child-process"
             ]
         }
     ],
