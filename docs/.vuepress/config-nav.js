@@ -9,7 +9,6 @@ module.exports = [
                 items: [
                     { text: "vue", link: "/blogs/vue/" },
                     { text: "vuepress", link: "/blogs/vuepress/" },
-                    { text: "cli", link: "/blogs/cli/" },
                     { text: "others", link: "/blogs/others/" }
                 ]
             },

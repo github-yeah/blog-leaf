@@ -20,14 +20,18 @@ tags:
     npm run docs:dev
     ```
 
-3. 发布运行项目根目录的`deploy.sh`进行部署
-    - 1. 在项目terminal中执行`./deploy.sh`
-    - 2. 或找到`deploy.sh`双击运行
+3. 发布
+
+    ```bash
+    npm run docs:publish
+    ```
   
-   ::: tip
+    ::: tip
+
+    - 也可以在项目terminal中执行`./deploy.sh`
     - 自动构建
     - 自动提交到`gh-pages`分支
     - 可以自定义`deploy.sh`中的配置
-   :::
+    :::
 
 4. [自动化集成](../blogs/vuepress/deploy.md#Push代码时触发自动部署)<Badge text="施工中..." type="warning"/>

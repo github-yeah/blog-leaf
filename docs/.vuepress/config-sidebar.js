@@ -34,18 +34,14 @@ module.exports = {
             ]
         }
     ],
-    "/blogs/cli/": [
+    "/blogs/others/": [
         {
-            title: "Command-Line Interface",
+            title: "随笔",
             collapsable: false,
             children: [
-                "",
-                "gulp",
-                "child-process"
+                ""
             ]
-        }
-    ],
-    "/blogs/others/": [
+        },
         {
             title: "TypeScript",
             collapsable: false,
@@ -60,9 +56,10 @@ module.exports = {
             title: "Advanced",
             collapsable: false,
             children: [
-                "",
-                "vscode",
-                "CLI"
+                "advanced/",
+                "advanced/cli",
+                "advanced/gulp",
+                "advanced/child-process"
             ]
         },
     ],

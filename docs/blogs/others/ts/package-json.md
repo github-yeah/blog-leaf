@@ -1,16 +1,14 @@
 ---
-title: "package.json"
+title: "package.json简介"
 sidebarDepth: 2
 tags: 
     - pakage
 ---
 
 
-### 初始化`package.json`
+## `scripts`简介
 
-```bash
-npm init
-```
+## `bin`简介
 
 ### `scripts` snippts
 

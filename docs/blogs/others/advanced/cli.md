@@ -117,3 +117,16 @@ tsc --init
 这样我们就实现了一个自定义的全局命令，就是这么简单
 
 接下来，让我们搞点花里胡哨的东西
+
+
+
+### 依赖库
+
+[commander](https://www.npmjs.com/package/commander) （命令工具）
+[download](https://www.npmjs.com/package/download) （文件下载）
+[fs-extra](https://www.npmjs.com/package/fs-extra) （本地文件操作）
+[inquirer](https://www.npmjs.com/package/inquirer) （命令行交互）
+[update-notifier](https://www.npmjs.com/package/update-notifier) （pm在线检查更新）
+[chalk](https://www.npmjs.com/package/chalk) （控制台输出内容样式）
+[log-symbols](https://www.npmjs.com/package/log-symbols) （日志美化）
+[ora](https://www.npmjs.com/package/ora) （Spinner等待动画）
