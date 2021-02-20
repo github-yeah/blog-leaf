@@ -17,6 +17,8 @@ export const exec = (cmd: string, args: string[]) => new Promise<{ exitCode: num
     (resolve, reject) => {
         const subshellFlag = _isWindows ? "/c" : "-c";
         const command = _isWindows ? [_possiblyQuote(cmd), ...args] : [`${cmd} ${args.join(" ")}`];
+        console.log(command);
+
         const proc = spawn(_isWindows ? "cmd" : "/bin/sh", [subshellFlag, ...command], { stdio: "inherit", windowsVerbatimArguments: true });
 
         proc.on(

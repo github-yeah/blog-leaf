@@ -28,10 +28,16 @@ npm init
 
 根据提示设置一下项目
 
-### 安装本地依赖
+### 安装项目开发依赖（`-D`）
 
 ```bash
-npm install typescript ts-node -D
+npm install ts-node -D
+```
+
+### 安装项目运行依赖（`-d`）
+
+```bash
+npm install typescript -d
 ```
 
 安装本地依赖后，可以使用 `tsc` 转译命令。
@@ -55,6 +61,10 @@ tsc --init
 
     console.log("从0开始CLI");
    ```
+
+   :::tip
+   开头的`#!/usr/bin/env node`不能少，这指定了node环境的路径
+   :::
 
 2. 在`package.json`中通过`bin`配置命令对应的可执行文件地址
 

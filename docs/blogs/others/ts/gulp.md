@@ -25,28 +25,29 @@ tags:
 npm install gulp-cli -g
 ```
 
-- 安装开发依赖
+- 安装项目运行依赖
 
 ```bash
-npm install  gulp -D
+npm install  gulp -d
 ```
 
 - 我们使用 `gulpfile.ts` 代替 `gulpfile.js` 实现任务脚本，需安装：
 
 ```bash
-npm install ts-node typescript @types/gulp -D
+npm install ts-node @types/gulp -D
+npm install typescript -d
 ```
 
 - 安装 `gulp-typescript`插件，用于编译`.ts`文件，
 
 ```bash
-npm install gulp-typescript -D
+npm install gulp-typescript -d
 ```
 
 - 安装 `del`本地依赖，用于清理`dist`目录，
 
 ```bash
-npm install del -D
+npm install del -d
 ```
 
 ## 创建`gulpfile.ts`
