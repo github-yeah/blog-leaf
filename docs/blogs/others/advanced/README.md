@@ -5,4 +5,9 @@ tags:
     - advanced
 ---
 
-## 开始进阶
+## 写在前面
+
+- 集成构建工具（`gulp`等）
+- 从0实现`CLI`
+- `child_process`
+- 打包发布

@@ -7,6 +7,7 @@
     "leaf": "dist/bin/leaf.js"
   },
   "scripts": {
+    "test": "tsc bin/leaf.ts & node leaf.js",
     "clean": "ts-node lib/clean.ts",
     "prebuild": "npm run clean",
     "build": "tsc",

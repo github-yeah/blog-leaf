@@ -1,5 +1,5 @@
 ---
-title: "tsconfig.json简介"
+title: "配置tsconfig.json"
 sidebarDepth: 1
 tags: 
     - ts

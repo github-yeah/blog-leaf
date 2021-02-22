@@ -28,10 +28,14 @@ tags:
 ### 安装`typescript`本地开发依赖
 
 ```bash
-npm install typescript -D
+npm install typescript --save-dev
 ```
 
 安装`typescript`依赖后，可以使用`tsc`命令执行初始化、编译等行为
+
+:::tip
+在终端输入`tsc --all`可以查看所有`tsc`命令
+:::
 
 ### 初始化`tsconfig.json`
 
@@ -49,13 +53,29 @@ tsc --init
 └── tsconfig.json
 ```
 
-### 使用`tsc`进行编译
+### 编译
 
-- 单纯调用`tsc`命令，编译器会从当前目录逐级向上搜索`tsconfig.json`文件，并根据配置进行编译
-- 调用`tsc --project projectName`或`tsc -p projectName`可以指定一个包含`tsconfig.json`的目录
-- `tsc --watch`，监听文件变化后自动编译
-- `tsc xx.ts`，只编译`xx.ts`文件
-- `tsc` 后面还可以跟很多参数，这里后面再介绍
+安装`typescript`依赖后，我们就可以使用`tsc`命令编译`.ts`文件了。
+
+- 编译整个工程
+  - 单纯调用`tsc`命令，编译器会从当前目录逐级向上搜索`tsconfig.json`文件，并根据其配置进行编译。
+  - 调用`tsc --project projectName`（或`tsc -p projectName`）可以指定一个包含`tsconfig.json`的目录，并根据其配置进行编译
+- 编译指定`.ts`文件
+  - 编译单个文件：`tsc file.ts`
+  - 编译多个文件：`tsc file.ts file1.ts file2.ts`
+- 自动编译
+  - 监听文件并自动编译：`tsc --watch`（或`tsc -w`）
+- 你可以通过编译参数改变默认编译配置
+  - 比如：`tsc file.ts file2.ts --outDir dist`（将`dist`作为编译生成的`.js`的输出目录）
+
+:::tip
+在终端输入`tsc --all`可以查看所有`tsc`命令。
+
+```bash
+tsc --all
+```
+
+:::
 
 ### 使用`node`测试编译后生成的`.js`文件
 
@@ -70,7 +90,7 @@ node xx/xx/x.js
 1. 首先安装`ts-node`本地开发依赖
 
    ```bash
-   npm install ts-node -D
+   npm install ts-node --save-dev
    ```
 
 2. 直接调用`.ts`文件

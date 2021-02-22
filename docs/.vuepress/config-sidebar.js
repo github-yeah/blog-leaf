@@ -48,8 +48,7 @@ module.exports = {
             children: [
                 "ts/",
                 "ts/package-json",
-                "ts/tsconfig-json",
-                "ts/gulp"
+                "ts/tsconfig-json"
             ]
         },
         {
@@ -57,8 +56,8 @@ module.exports = {
             collapsable: false,
             children: [
                 "advanced/",
-                "advanced/cli",
                 "advanced/gulp",
+                "advanced/cli",
                 "advanced/child-process"
             ]
         },
