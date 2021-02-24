@@ -15,6 +15,7 @@ import * as commandLoader from "./loader";
 
 import { BANNER } from './../lib/ui/banner';
 
+
 // 终端输出 banner
 // console.info(red(BANNER));
 

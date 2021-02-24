@@ -6,7 +6,7 @@ export const of = (action: Action): Command => program => {
     program
         .command("info")
         .alias("i")
-        .description("CLI详情.")
+        .description("显示CLI详情.")
         .action(async () => {
             await action();
         });

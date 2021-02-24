@@ -128,3 +128,13 @@ tsc --init
 - [chalk](https://www.npmjs.com/package/chalk) （控制台输出内容样式）
 - [log-symbols](https://www.npmjs.com/package/log-symbols) （日志美化）
 - [ora](https://www.npmjs.com/package/ora) （Spinner等待动画）
+
+
+继续实现一个纯净项目的cli
+
+```ts
+// 执行 create命令 name参数为必选，不设置将会报错
+program.command('create <name>')
+// 执行 create命令 name参数为可选
+program.command('create [name]')   
+```
