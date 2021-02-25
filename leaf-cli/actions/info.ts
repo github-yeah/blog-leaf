@@ -1,6 +1,5 @@
 import { green, blue, red } from "chalk";
 import * as os from "os";
-import { readdir } from "fs";
 
 import { BANNER } from './../lib/ui/banner';
 import { Action } from "./action";

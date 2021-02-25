@@ -1,4 +1,6 @@
 import { spawn } from "child_process";
+import * as fs from "fs";
+import { join } from "path";
 
 // 判断是否是window平台
 const _isWindows = /^win/.test(process.platform);
@@ -41,3 +43,21 @@ export const exec = (cmd: string, args: string[]) => new Promise<{ exitCode: num
         );
     }
 );
+
+// 删除文件夹或文件
+export const del = (path: fs.PathLike | fs.PathLike[]) => {
+    if (Array.isArray(path)) {
+        path.forEach(p => del(p));
+        return;
+    }
+
+    const stats = fs.statSync(path);
+    if (stats.isFile()) {
+        return fs.unlinkSync(path);
+    }
+
+    const files = fs.readdirSync(path);
+    files.forEach(file => del(join(path.toString(), file)));
+
+    return fs.rmdirSync(path);
+};

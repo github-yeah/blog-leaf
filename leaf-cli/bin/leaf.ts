@@ -13,7 +13,7 @@ import * as tscfg from "../tsconfig.json";
 // commands loader
 import * as commandLoader from "./loader";
 
-import { BANNER } from './../lib/ui/banner';
+import { BANNER } from './../lib/ui/banner';;
 
 
 // 终端输出 banner
