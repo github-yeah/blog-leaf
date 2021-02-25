@@ -1,3 +1,4 @@
+import { npmRunner } from './../lib/npm-runner';
 import { green, blue, red } from "chalk";
 import * as path from "path";
 import * as fs from "fs";
@@ -52,17 +53,13 @@ const createProject = async (project: string | undefined, model: CreateModel = C
         }
     }
 
-    // 开始创建
+    // 创建目录
+    console.info(`创建目录:${blue(projectDirectory)}`);
 
 
-    // fs.mkdir(projectDirectory, err => {
-    //     if (err) {
-    //         console.error(red(err));
-    //         process.exit(1);
-    //     }
-    // })
-
-    // 输出
+    // 创建pakage.json
+    console.info(`npm初始化`);
+    npmRunner('init', projectDirectory);
 
 };
 
