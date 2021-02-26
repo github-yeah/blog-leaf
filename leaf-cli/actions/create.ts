@@ -1,17 +1,40 @@
+import { read } from './../lib/file-system';
+import { tscRunner } from './../lib/tsc-runner';
 import { npmRunner } from './../lib/npm-runner';
 import { green, blue, red } from "chalk";
 import * as path from "path";
 import * as fs from "fs";
 import * as inquirer from "inquirer";
 import { Action } from "./action";
-import { del } from "../lib/utils";
-import { exec } from "child_process";
+import { del } from "../lib/file-system";
 
 // 创建模式
 enum CreateModel {
     Overwrite,
     Merge,
     Cancel
+};
+
+// 初始化package
+const initPackage = async (cwd: string) => {
+    console.info(`package.json 初始化`);
+    return npmRunner('init -y', true, cwd)
+        .then(res => {
+            console.info(blue(res));
+            console.info(green(`package.json 初始化成功`));
+            return res
+        });
+};
+
+// 初始化tsc
+const initTscongfig = async (cwd: string) => {
+    console.info(`tsconfig.json 初始化`);
+    return tscRunner('--init', false, cwd)
+        .then(
+            res => {
+                console.info(`tsconfig.json 初始化成功`);
+            }
+        );
 };
 
 
@@ -45,7 +68,7 @@ const createProject = async (project: string | undefined, model: CreateModel = C
         if (model === CreateModel.Overwrite) {
             console.info(`清空目录:${blue(projectDirectory)}`);
             try {
-                del(projectDirectory);
+                await del(projectDirectory);
             }
             catch (err) {
                 console.error(`清空目录出错：${err}`);
@@ -55,12 +78,29 @@ const createProject = async (project: string | undefined, model: CreateModel = C
 
     // 创建目录
     console.info(`创建目录:${blue(projectDirectory)}`);
+    if (!fs.existsSync(projectDirectory)) {
+        try {
+            await fs.mkdirSync(projectDirectory);
+        } catch (error) {
+            console.info(`${red('创建目录失败!')} -- ${red(projectDirectory)}`);
+            return;
+        }
+    }
+
 
 
     // 创建pakage.json
-    console.info(`npm初始化`);
-    npmRunner('init', projectDirectory);
+    await initPackage(projectDirectory);
 
+    // 初始化tsconfig.json
+    await initTscongfig(projectDirectory);
+
+    // package.json
+    const pkg = await read(path.join(process.cwd(), 'package.json'));
+    if (pkg) {
+        const pkgJSON = JSON.parse(pkg.toString());
+        console.log(pkgJSON);
+    }
 };
 
 // 交互问题列表
