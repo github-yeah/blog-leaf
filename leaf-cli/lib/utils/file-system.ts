@@ -8,6 +8,11 @@ export const del = (path: fs.PathLike | fs.PathLike[]) => {
         return;
     }
 
+    const exist = fs.existsSync(path);
+    if (!exist) {
+        return;
+    }
+
     const stats = fs.statSync(path);
     if (stats.isFile()) {
         return fs.unlinkSync(path);

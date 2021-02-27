@@ -6,7 +6,7 @@ export type Runner = <T extends true | false>(cmd: string, collect?: T, cwd?: st
 
 // 创建命令行runner
 // @return  (cmd, collect, cwd) => Promise;    cmd: 命令, collect: 是否收集数据, cwd: 执行路径
-export const runnerOf = (executor: string): Runner => async <T extends true | false>(cmd: string, collect?: T, cwd: string = process.cwd()) => new Promise<T extends true ? string : { exitCode: number }>(
+export const runnerOf = (bin: string): Runner => async <T extends true | false>(cmd: string, collect?: T, cwd: string = process.cwd()) => new Promise<T extends true ? string : { exitCode: number }>(
     (resolve, reject) => {
 
         const options: SpawnOptions = {
@@ -15,7 +15,7 @@ export const runnerOf = (executor: string): Runner => async <T extends true | fa
             stdio: collect ? 'pipe' : 'inherit'
         };
 
-        const child = spawn(`${executor}`, [cmd], options);
+        const child = spawn(`${bin}`, [cmd], options);
 
         child.stdout?.on('data',
             data => resolve(data.toString())
@@ -27,7 +27,7 @@ export const runnerOf = (executor: string): Runner => async <T extends true | fa
                     resolve({ exitCode } as any);
                 }
                 else {
-                    console.error(`${red('执行命令进程退出：')} ${blue(`${executor} ${cmd}`)} [exitCode: ${exitCode}]`);
+                    console.error(`${red('执行命令进程退出：')} ${blue(`${bin} ${cmd}`)} [exitCode: ${exitCode}]`);
                     reject({ exitCode })
                 }
             }

@@ -10,6 +10,9 @@
     "outDir": "dist",
     "resolveJsonModule": true
   },
+  "files": [
+    "lib/manager/templete/templete.json"
+  ],
   "include": [
     "bin",
     "lib",
