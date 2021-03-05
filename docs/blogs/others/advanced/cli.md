@@ -138,3 +138,32 @@ program.command('create <name>')
 // 执行 create命令 name参数为可选
 program.command('create [name]')   
 ```
+
+### `typescript` 编译过程 （单独创建一个md说明）
+
+```ts
+import * as ts from "typescript";
+```
+
+- 设置编译选项 `ts.CompilerOptions`：
+  - 通过读取本地`tsconfig.json`
+  - 手动编写
+- 通过调用 `ts.createProgram`创建 `ts.Program`，传入将要编译的文件列表`rootNames`
+- 调用 `ts.Program.emit` 编译文件
+
+```ts
+/**
+ * import * as ts from "typescript";
+ * 
+ * 关于 `writeFile`: ts.WriteFileCallback：
+ * 执行 `ts.Program.emit`时，文件编译完成后会调用 `writeFile` 处理编译后的内容
+ * 如果调用 `ts.Program.emit` 的时候传入`writeFile` 参数，则文件编译完成后执行`writeFile`（`ts.CompilerHost.writeFile` 将被忽略）
+ * 否则文件编译完成后会执行 `ts.CompilerHost.writeFile`
+ * 
+ * 关于 `ts.CompilerHost`
+ * 可以通过调用`ts.createProgram`创建 `ts.Program`的时候以`host`参数的形式传入
+ * 如果传入的`host`为空，则`ts.createProgram`会通过 `ts.createCompilerHost` 创建一个默认的host
+ * 另外：可以修改`ts.CompilerHost.writeFile`更改写入行为
+ * 通过`ts.createCompilerHost`创建的host，writeFile被调用的时候会把编译后的文件根据编译选项配置写入硬盘
+*/
+```
