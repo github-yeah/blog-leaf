@@ -13,6 +13,10 @@ import { of as createCmdOf } from "../commands/create";
 import { action as cleanAction } from "../actions/clean";
 import { of as cleanCmdOf } from "../commands/clean";
 
+// build 
+import { action as buildAction } from "../actions/build";
+import { of as buildCmdOf } from "../commands/build";
+
 // suggust 输入无效命令后尝试猜测用户意图
 import { action as suggestAction } from "../actions/suggest";
 import { of as suggestCmdOf } from "../commands/suggest";
@@ -31,6 +35,9 @@ export const load = (program: CommanderStatic) => {
     infoCmdOf(infoAction)(program);
     createCmdOf(createAction)(program);
     cleanCmdOf(cleanAction)(program);
+    buildCmdOf(buildAction)(program);
     invalidCommandHandler(program);
+
+    // clone from github
 };
 

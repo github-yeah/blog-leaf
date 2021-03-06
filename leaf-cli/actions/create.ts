@@ -1,4 +1,3 @@
-import { read } from '../lib/utils/file-system';
 import { npmRunner } from '../lib/manager/runner/npm-runner';
 import { green, blue, red } from "chalk";
 import * as path from "path";
@@ -9,6 +8,7 @@ import { del } from "../lib/utils/file-system";
 
 import { questions as templeteQuestions, TempleteMode, downloadTemplete } from "../lib/manager/templete/templete-manager";
 import { tscRunner } from '../lib/manager/runner/tsc-runner';
+
 
 
 // 创建模式
@@ -129,7 +129,6 @@ const questions: inquirer.QuestionCollection = [
 
 // Create Action
 export const action: Action = async (inputs, options) => {
-
     // 项目input
     const projectInput = inputs?.find(input => input.name === "project");
 

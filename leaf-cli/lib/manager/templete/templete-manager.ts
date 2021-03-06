@@ -1,8 +1,9 @@
 import { AnswerObject } from '../question/question-manager';
 import { join } from 'path';
 import { read } from '../../utils/file-system';
-import { QuestionCollection } from "inquirer";
+import { QuestionCollection, Separator } from "inquirer";
 import * as ora from "ora";
+
 
 // 模版模式
 export enum TempleteMode {
@@ -25,6 +26,7 @@ const _questions = [
         choices: [
             { name: '使用预设', value: TempleteMode.Preset },
             { name: '自定义', value: TempleteMode.Custom },
+            new Separator('--------'),
             { name: '不使用模版', value: TempleteMode.None }
         ],
         message: '设置模版：'
@@ -54,7 +56,7 @@ export const questions: QuestionCollection<TempleteAnswer> = _questions;
 
 
 // download
-const download = require('download-git-repo');
+const downloadGit = require('download-git-repo');
 
 // 下载模版
 export const downloadTemplete = async (templete: string, directory?: string) => {
@@ -62,7 +64,7 @@ export const downloadTemplete = async (templete: string, directory?: string) => 
     spinner.start();
 
     // 下载模版
-    await download(templete, directory || '.',
+    await downloadGit(templete, directory || '.',
         (err: any) => {
             console.log(err);
             err ? spinner.fail(`模版[${templete}]下载失败!`) : spinner.succeed(`模版[${templete}]下载成功!`);
