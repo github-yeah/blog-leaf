@@ -26,22 +26,27 @@ const getCommonPathOf = (pathArray: string[]) => pathArray.reduce(
     }
 );
 
-// Input 类型
-export type Input = string[] | {
-    readonly rootNames: string[];
-};
 
-// Output 类型
-export type Output = {
-    wirteFile: ts.WriteFileCallback;
-};
+/**
+ * @description Mappable
+ * @author xfy
+ */
+export interface Mappable {
+    /**
+     * @description map this => T
+     * @template T
+     * @param {(value: this) => T} handler
+     * @returns {T}
+     */
+    map<T>(handler: (value: this) => T): T;
+}
 
 /**
  * @description Project
  * @author xfy
  * @interface Project
  */
-export interface Project {
+export interface Project extends Mappable {
     /**
      * @description 项目配置
      */
@@ -61,24 +66,33 @@ export interface Project {
     /**
      * @description 编译文件
      * @param {string[]} [rootNames]
-     * @param {ts.WriteFileCallback} [writFile]
      */
-    compileFiles(rootNames?: string[], writFile?: ts.WriteFileCallback): void;
-
-    /**
-     * @description 编译文件
-     * @template T
-     * @param {Project} this
-     * @param {Input} [input]
-     * @param {T} [output]
-     * @returns {(T | undefined)}
-     * @memberof Project
-     */
-    compile<T extends Output>(this: Project, input?: Input, output?: T): T | undefined;
-
+    compileFiles(rootNames?: string[]): void;
 }
 
 export namespace Project {
+
+    /**@description 是否是Project类型*/
+    export const isProject = (o: any): o is Project => {
+        const p: Project = o;
+        if (typeof p.directory !== 'string') {
+            return false;
+        }
+
+        if (p.config === undefined) {
+            return false;
+        }
+
+        if (!Array.isArray(p.config.fileNames)) {
+            return false;
+        }
+
+        if (p.config.options === undefined) {
+            return false;
+        }
+        return true;
+    };
+
     /**
      * @description 以当前目录(process.cwd())为根目录生成 Project
      * @returns {Project}
@@ -144,16 +158,17 @@ export namespace Project {
             existingOptions
         );
 
-        console.log(directory);
-        console.log(config.options);
-
-
         if (config.errors) {
             config.errors.forEach(err => console.log(err));
         }
 
-        return { directory, config, src, compileFiles, compile };
+        return { directory, config, map, src, compileFiles };
     }
+}
+
+// Project Map
+function map<T>(this: Project, handler: (value: Project) => T): T {
+    return handler(this);
 }
 
 // 生成项目源文件流
@@ -173,7 +188,7 @@ function src(this: Project): NodeJS.ReadWriteStream {
 }
 
 // 编译项目
-function compileFiles(this: Project, rootNames?: string[], writFile?: ts.WriteFileCallback): void {
+function compileFiles(this: Project, rootNames?: string[]): void {
     // compiler options
     const options = this.config.options;
 
@@ -183,36 +198,12 @@ function compileFiles(this: Project, rootNames?: string[], writFile?: ts.WriteFi
     options.skipDefaultLibCheck ||= true;
     options.noErrorTruncation ||= true;
 
-    // 设置 rootNames 缺省值
     rootNames ||= this.config.fileNames;
+
+    // 编译并输出到目录
     const program = ts.createProgram(rootNames, options);
-    program.emit(undefined, writFile);
+    program.emit();
 }
-
-
-function compile<T extends Output>(this: Project, input?: Input, output?: T): T | undefined {
-    // 设置options缺省值
-    const options = this.config.options;
-    options.target ||= ts.ScriptTarget.ES5;
-    options.newLine ||= ts.NewLineKind.CarriageReturnLineFeed;
-    options.skipDefaultLibCheck ||= true;
-    options.noErrorTruncation ||= true;
-
-    // 设置 rootNames 缺省值
-    input ||= this.config.fileNames;
-    const rootNames = Array.isArray(input) ? input : input.rootNames;
-    const program = ts.createProgram(rootNames, options);
-
-    let writeFile: ts.WriteFileCallback | undefined;
-    if (output) {
-        writeFile = (fileName, data, writeByteOrderMark) => output.wirteFile(fileName, data, writeByteOrderMark);
-    }
-    program.emit(undefined, writeFile);
-    return output;
-}
-
-
-
 
 
 /**

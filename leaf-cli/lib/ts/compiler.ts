@@ -1,14 +1,36 @@
-import { CompilerHost } from './host';
-import File from './file';
 import * as ts from "typescript";
-import * as path from 'path';
 import { Project } from "./project";
-import { dest, src, VinylFileLike } from './vfs';
-import FileReader from './filereader';
+import { dest, src, VinylFileLike, VinylFileReader } from './vfs';
 import { Duplex, Readable, Writable } from 'stream';
 
 import * as VinylFile from 'vinyl';
 
+
+/**
+ * @description 编译文件
+ * @author xfy
+ * @param {ts.CompilerOptions} compilerOptions 如果有 `project` 选项，表示要编译`project`对应的项目
+ * @param {string[]} [rootNames] 将要编译的文件列表，如果为空，则编译project.config.fileNames
+ * @param {ts.WriteFileCallback} [writFile] 如果为空则默认按照编译选项直接编译
+ */
+function compileFiles(compilerOptions: ts.CompilerOptions, rootNames?: string[], writFile?: ts.WriteFileCallback): void {
+    // 如果有 `project` 选项，表示要编译`project`对应的项目
+    if (compilerOptions.project || !rootNames || rootNames.length === 0) {
+        const project = Project.create(compilerOptions.project || '', compilerOptions);
+        compilerOptions = project.config.options;
+        rootNames ||= project.config.fileNames;
+    }
+
+    // 设置compilerOptions缺省值
+    compilerOptions.target ||= ts.ScriptTarget.ES5;
+    compilerOptions.newLine ||= ts.NewLineKind.CarriageReturnLineFeed;
+    compilerOptions.skipDefaultLibCheck ||= true;
+    compilerOptions.noErrorTruncation ||= true;
+
+    // 设置 rootNames 缺省值
+    const program = ts.createProgram(rootNames, compilerOptions);
+    program.emit(undefined, writFile);
+}
 
 
 export class StreamCompiler extends Duplex {
@@ -16,35 +38,11 @@ export class StreamCompiler extends Duplex {
     // 从流中读取的源文件
     readonly sourceFiles: VinylFileLike[] = [];
 
-    get rootNames(): string[] {
-        return this.sourceFiles.map(file => file.path);
-    }
-
     constructor(
-        readonly project: Project,
-        readonly full: Readable
+        readonly compilerOptions: ts.CompilerOptions,
+        readonly projectDirectory: string,
     ) {
         super({ objectMode: true })
-    }
-
-    // 创建 program
-    protected _createProgram() {
-        const rootNames = this.sourceFiles.map(file => file.path);
-        const cwd = this.project.directory;
-        const base = this.project.directory;
-
-        this.project.compileFiles(rootNames,
-            (path, data) => {
-                this.full.push(new VinylFile(
-                    {
-                        path,
-                        contents: Buffer.from(data),
-                        cwd,
-                        base
-                    }
-                ));
-            }
-        );
     }
 
     // 写入源文件
@@ -63,25 +61,25 @@ export class StreamCompiler extends Duplex {
 
         callback(new Error('暂时不支持这种类型的数据'));
     }
+
+    // read
     _read = (size: number) => { };
 
     // 源文件写入完成
     end(file: any, encoding?: any, callback?: any) {
         super.end(file, encoding, callback);
-        // this._createProgram();
-
-        this.project.compile(this, this);
-
-
+        const rootNames = this.sourceFiles.map(file => file.path);
+        compileFiles(this.compilerOptions, rootNames, this._wirteFile);
     }
 
-    wirteFile: ts.WriteFileCallback = (path, data) => {
+    // 写入编译后的文件
+    private _wirteFile: ts.WriteFileCallback = (path, data) => {
         this.push(new VinylFile(
             {
                 path,
                 contents: Buffer.from(data),
-                cwd: this.project.directory,
-                base: this.project.directory
+                cwd: this.projectDirectory,
+                base: this.projectDirectory
             }
         ));
     };
@@ -89,25 +87,12 @@ export class StreamCompiler extends Duplex {
 
 
 
+function test() {
+    const proj = Project.create({ outDir: 'dist-123' })
 
-
-
-export async function testCompiler(files?: string[], compilerOptions?: ts.CompilerOptions) {
-
-    // console.log(files, compilerOptions, '111111111111'); return;
-
-
-    // Project.of('actions').src().pipe(new FileReader());
-    // return;
-
-    const full = new Readable({ objectMode: true });
-    full._read = size => { };
-
-    const project = Project.create();
-    src('D:/test/lib/**/*.ts')
-        .pipe(new StreamCompiler(project, full))
-        .pipe(dest('dist12345'));
+    proj.src()
+        .pipe(new StreamCompiler({}, proj.directory))
+        .pipe(dest('dist-123'))
 }
 
-
-
+// test();

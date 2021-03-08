@@ -1,8 +1,5 @@
-import { red, yellow } from "chalk";
-import leven = require("leven");
 import { Action, Input } from "./action";
-
-import { testCompiler } from '../lib/ts/compiler';
+import { Project } from "../lib/ts/project";
 
 
 // build Action
@@ -19,5 +16,6 @@ export const action: Action = async (inputs?: Input[], options?: Input[]) => {
         , {} as any
     );
 
-    testCompiler(files, compilerOptions);
+    const project = compilerOptions.project || compilerOptions;
+    Project.create(project, compilerOptions).compileFiles(files && files.length === 0 ? undefined : files);
 };
