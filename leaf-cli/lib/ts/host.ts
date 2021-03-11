@@ -1,139 +1,67 @@
+import { Readable } from 'stream';
 import * as ts from 'typescript';
-import * as path from "path";
+import * as VinylFile from 'vinyl';
+import { createReadable, createVinylFile } from './stream';
+import { getExtname } from './utils';
 
-/**
- * @description SourceFile 文件类型
- * @protected
- * @type {Map<string, T>}
- */
-type SourceFile = { path: string, contents: string };
 
-/**
- * @description CompilerHost
- * @author xfy
- * @export
- * @class CompilerHost
- * @implements {ts.CompilerHost}
- */
-export class CompilerHost implements ts.CompilerHost {
-    // host proxy
-    readonly hostProxy: ts.CompilerHost;
 
-    // new line
-    private _newLine: string | undefined;
+export interface CompilationHost<T> extends ts.CompilerHost {
+    readonly compilationResult: T;
+};
 
-    /**
-     * @description 文件列表映射
-     * @protected
-     * @type {Map<string, SourceFile>}
-     */
-    protected _sourceFileMap: Map<string, SourceFile> = new Map();
+export interface CompilationResult<T> {
+    readonly All: T;
+    readonly Js: T;
+    readonly Dts: T;
+}
 
-    /**
-     * @description 文件列表
-     * @type {readonly}
-     */
-    get sourceFiles(): SourceFile[] {
-        return [...this._sourceFileMap.values()]
+export namespace CompilationHost {
+    export function createDefaultCompilerHost(compilerOptions: ts.CompilerOptions): CompilationHost<void> {
+        return ts.createCompilerHost(compilerOptions) as CompilationHost<void>;
     }
 
-
-    /**
-     * @description 重置文件列表
-     */
-    reset(): void {
-        this._sourceFileMap.clear();
-    }
-
-    constructor(
-        readonly currentDirectory: string,
-        readonly options: ts.CompilerOptions
-    ) {
-        this.hostProxy = ts.createCompilerHost(options);
-    }
-
-    fileExists(fileName: string): boolean {
-        return this.hostProxy.fileExists(fileName);
-    }
-
-    readFile(fileName: string): string | undefined {
-        return this.hostProxy.readFile(fileName);
-    }
-
-    writeFile(fileName: string, content: string, writeByteOrderMark: boolean, onError?: (message: string) => void) {
-        if (writeByteOrderMark) {
-            // 此处处理 content
-        }
-        this._sourceFileMap.set(fileName, { path: fileName, contents: content });
-    }
-
-    getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void, shouldCreateNewSourceFile?: boolean): ts.SourceFile | undefined {
-        const contents = this.readFile(fileName);
-        if (!contents) {
-            return undefined;
-        }
-        return ts.createSourceFile(fileName, contents, this.options.target || ts.ScriptTarget.ES3);
-    }
-
-    getDefaultLibFileName(options: ts.CompilerOptions): string {
-        return this.hostProxy.getDefaultLibFileName(options);
-    }
-
-    getCurrentDirectory(): string {
-        return this.currentDirectory;
-    }
-
-    getCanonicalFileName(fileName: string): string {
-        const normalized = path.normalize(fileName);
-        return this.useCaseSensitiveFileNames() ? normalized.toLowerCase() : normalized;
-    }
-
-    useCaseSensitiveFileNames(): boolean {
-        return this.hostProxy.useCaseSensitiveFileNames();
-    }
-
-    getNewLine(): string {
-        if (this._newLine) {
-            return this._newLine;
-        }
-
-        switch (this.options.newLine) {
-            case ts.NewLineKind.CarriageReturnLineFeed:
-                this._newLine = '\r\n';
-                break;
-            case ts.NewLineKind.LineFeed:
-                this._newLine = '\n';
-                break;
-            default:
-                this._newLine = '\n';
+    export function createStreamCompilerHost(compilerOptions: ts.CompilerOptions, all?: Readable, js?: Readable, dts?: Readable) {
+        const directory = process.cwd();
+        const host = ts.createCompilerHost(compilerOptions) as CompilationHost<CompilationResult<NodeJS.ReadableStream>>;
+        const All = all || createReadable();
+        const Js = js || createReadable();
+        const Dts = dts || createReadable();
+        (host as { compilationResult: CompilationResult<NodeJS.ReadableStream> }).compilationResult = { All, Js, Dts };
+        host.writeFile = (fileName: string, data: string, writeByteOrderMark) => {
+            const file = createVinylFile(fileName, data, directory);
+            const extname = getExtname(fileName, ts.Extension.Dts);
+            switch (extname) {
+                case ts.Extension.Dts:
+                    Dts.push(file);
+                    All.push(file);
+                    break;
+                case ts.Extension.Js:
+                    Js.push(file);
+                    All.push(file);
+                    break;
+            }
         };
-
-        return this._newLine;
-    }
-
-
-    readDirectory(rootDir: string, extensions: readonly string[], excludes: readonly string[] | undefined, includes: readonly string[], depth?: number): string[] {
-        return this.hostProxy.readDirectory ? this.hostProxy.readDirectory(rootDir, extensions, excludes, includes, depth) : [];
-    }
-
-
-    getParsedCommandLine?(fileName: string): ts.ParsedCommandLine | undefined {
-        return this.hostProxy.getParsedCommandLine ? this.hostProxy.getParsedCommandLine(fileName) : undefined;
-    }
-
-    realpath(path: string): string {
-        return this.hostProxy.realpath ? this.hostProxy.realpath(path) : '';
-    }
-
-    getDirectories(path: string): string[] {
-        return this.hostProxy.getDirectories ? this.hostProxy.getDirectories(path) : [];
-    }
-
-    directoryExists(directoryName: string): boolean {
-        return this.hostProxy.directoryExists ? this.hostProxy.directoryExists(directoryName) : false;
+        return host;
     }
 
 }
 
 
 
+
+
+/**
+ * import * as ts from "typescript";
+ *
+ * 关于 `writeFile`: ts.WriteFileCallback：
+ * 执行 `ts.Program.emit`时，文件编译完成后会调用 `writeFile` 处理编译后的内容
+ * 如果调用 `ts.Program.emit` 的时候传入`writeFile` 参数，则文件编译完成后执行`writeFile`（`ts.CompilerHost.writeFile` 将被忽略）
+ * 否则文件编译完成后会执行 `ts.CompilerHost.writeFile`
+ *
+ * 关于 `ts.CompilerHost`
+ * 可以通过调用`ts.createProgram`创建 `ts.Program`的时候以`host`参数的形式传入
+ * 如果传入的`host`为空，则`ts.createProgram`会通过 `ts.createCompilerHost` 创建一个默认的host
+ * 另外：可以修改`ts.CompilerHost.writeFile`更改写入行为
+ * 通过`ts.createCompilerHost`创建的host，writeFile被调用的时候会把编译后的文件根据编译选项配置写入硬盘
+*/

@@ -10,6 +10,7 @@ const optionList = [
     '--outDir [dirname]',
     '--target [ScriptTarget]',
     '--project [directory]',
+    '--outFile [file]',
     '--declaration',
 ];
 
