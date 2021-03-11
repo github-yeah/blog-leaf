@@ -58,6 +58,7 @@ module.exports = {
                 "advanced/",
                 "advanced/gulp",
                 "advanced/cli",
+                "advanced/compile",
                 "advanced/child-process"
             ]
         },

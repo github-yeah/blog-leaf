@@ -23,7 +23,7 @@ const bootsctrap = () => {
 
     // 基础信息
     program
-        .version(pkg.version, '-v, --version', '当前node版本.')
+        .version(pkg.version, '-v, --version', 'Cli当前版本.')
         .usage('<command> [options]')
         .helpOption('-h, --help', '帮助.');
 
