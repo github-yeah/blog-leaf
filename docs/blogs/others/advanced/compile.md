@@ -1,5 +1,5 @@
 ---
-title: "typescript编译编译过程"
+title: "TypeScript编译编译过程"
 sidebarDepth: 2
 tags: 
     - ts compile
